@@ -1,0 +1,14 @@
+scalar Upload
+
+input CreateCommunityInput {
+  name: String!
+  picture: Upload
+  description: String!
+  country: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type Mutation {
+  createCommunity(input: CreateCommunityInput!): Boolean!
+}

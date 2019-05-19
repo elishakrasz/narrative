@@ -1,0 +1,12 @@
+input UpdateCommunityInput {
+  name: String!
+  picture: Upload
+  category: String!
+  country: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type Mutation {
+    updateCommunity(communityId: String!, input: UpdateCommunityInput!): Boolean!
+}
