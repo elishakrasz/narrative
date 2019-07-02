@@ -1,0 +1,9 @@
+type Message {
+  text: String!
+  user: User!
+  communityId: String!
+}
+
+type Query {
+  messages(communityId: String!): [Message!]!
+}

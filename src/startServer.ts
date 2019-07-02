@@ -17,6 +17,7 @@ import { RedisPubSub } from "graphql-redis-subscriptions";
 import { createTestConn } from "./testUtils/createTestConn";
 import { userLoader } from "./loaders/UserLoader"
 
+// const pubsub = new PubSub();
 const SESSION_SECRET = "ajslkjalksjdfkl";
 const RedisStore = connectRedis(session as any);
 
@@ -32,6 +33,7 @@ export const startServer = async () => {
         }
       : {}
   );
+
   const server = new GraphQLServer({
     schema: genSchema() as any,
     context: ({ request, response }) => ({

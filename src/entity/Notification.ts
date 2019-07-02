@@ -6,19 +6,18 @@ import {
     Column
 } from "typeorm"
 import { User } from './User'
-import { Community } from './Community'
 
-@Entity("messages")
-export class Message extends BaseEntity {
+@Entity("notifications")
+export class Notification extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @Column("text")
-    text: string
+    label: string
+
+    @Column("varchar")
+    notification: string
 
     @ManyToOne(() => User)
     user: User;
-
-    @ManyToOne(() => Community)
-    community: Community;
 }

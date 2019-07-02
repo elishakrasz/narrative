@@ -5,7 +5,8 @@ export default async (
   parent: any,
   args: any,
   context: any,
+  subscribe: any,
   info: any
 ) => {
-  return resolver(parent, args, context, info);
+  return resolver(parent, args, context, info, subscribe);
 };

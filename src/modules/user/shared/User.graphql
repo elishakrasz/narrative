@@ -4,3 +4,7 @@ type User {
   firstName: String
   lastName: String
 }
+
+type Subscription {
+  user: [User]
+}

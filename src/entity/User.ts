@@ -1,5 +1,5 @@
 import { Community } from './Community';
-// import { Profile } from './Profile'
+import { Profile } from './Profile'
 import * as bcrypt from "bcryptjs";
 import {
   Entity,
@@ -7,8 +7,11 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   BeforeInsert,
-  OneToOne
+  JoinColumn,
+  OneToOne,
+  OneToMany,
 } from "typeorm";
+import { Library } from './Library';
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -30,13 +33,21 @@ export class User extends BaseEntity {
   confirmed: boolean;
 
   @Column("boolean", { default: false })
+  admin: boolean;
+
+  @Column("boolean", { default: false })
   forgotPasswordLocked: boolean;
 
-  @OneToOne(() => Community, community => community.user)
+  @OneToOne(() => Community)
+  @JoinColumn()
   community: Community;
 
-  // @OneToOne(() => Profile, profile => profile.user)
-  // profile: Profile;
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
+
+  @OneToMany(() => Library, library => library.user)
+  library: Library[];
 
   @BeforeInsert()
   async hashPasswordBeforeInsert() {

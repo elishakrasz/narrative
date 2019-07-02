@@ -3,14 +3,13 @@ import {
     BaseEntity,
     PrimaryGeneratedColumn,
     Column,
-    OneToOne,
     OneToMany
 } from "typeorm"
 import { User } from './User'
-import { Library } from "./Library";
+import { Community } from './Community'
 
-@Entity("community")
-export class Community extends BaseEntity {
+@Entity("library")
+export class Library extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -18,20 +17,23 @@ export class Community extends BaseEntity {
     name: string;
 
     @Column("varchar", { length: 100} )
-    country: string;
+    filename: string;
 
     @Column("varchar", { nullable: true} )
-    pictureUrl: string;
+    mimetype: string;
 
     @Column("varchar", { nullable: true} )
-    avatarUrl: string;
+    encoding: string;
 
     @Column("varchar")
     description: string;
 
-    @OneToOne(() => User, user => user.community)
+    @Column("varchar")
+    fileUrl: string;
+
+    @OneToMany(() => User, user => user.library)
     user: User;
 
-    @OneToMany(() => Library, library => library.community)
-    library: Library[]
+    @OneToMany(() => Community, community => community.library)
+    community: Community;
 }
